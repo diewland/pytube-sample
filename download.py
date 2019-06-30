@@ -8,5 +8,5 @@ url = 'https://www.youtube.com/watch?v=vrXkfDIODZI'
 hi_vid = YouTube(url).streams.first()
 
 print(hi_vid)
-print('Downloading..')
-hi_vid.download('./')
+print('Downloading to /mp4..')
+hi_vid.download('./mp4/')
