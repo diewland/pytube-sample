@@ -1,12 +1,18 @@
+import pathlib
+from datetime import datetime as dt
 from pytube import YouTube
-from pprint import pprint as pp
 
-#url = 'https://www.youtube.com/watch?v=MUo3sMXilho'
-#url = 'https://www.youtube.com/watch?v=x_kiX0uUDNI'
-url = 'https://www.youtube.com/watch?v=vrXkfDIODZI'
+# create date folder
+folder_name = dt.now().strftime("%Y%m%d")
+pathlib.Path(folder_name).mkdir(exist_ok=True) 
 
-hi_vid = YouTube(url).streams.first()
+print("read url(s) from list.txt")
+f = open("list.txt")
+lines = f.readlines()
+for line in lines:
+    url = line.strip()
+    print("downloading.. %s" % url)
+    hi_vid = YouTube(url).streams.first()
+    hi_vid.download(folder_name)
 
-print(hi_vid)
-print('Downloading to /mp4..')
-hi_vid.download('./mp4/')
+print('done, videos in folder %s/' % folder_name)
