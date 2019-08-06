@@ -1,3 +1,4 @@
+import sys
 import pathlib
 from datetime import datetime as dt
 from pytube import YouTube
@@ -6,9 +7,15 @@ from pytube import YouTube
 folder_name = dt.now().strftime("%Y%m%d")
 pathlib.Path(folder_name).mkdir(exist_ok=True) 
 
-print("read url(s) from list.txt")
-f = open("list.txt")
-lines = f.readlines()
+# gather urls
+if len(sys.argv) > 1:
+    print("read url(s) from commandline")
+    lines = sys.argv[1:]
+else:
+    print("read url(s) from list.txt")
+    f = open("list.txt")
+    lines = f.readlines()
+
 for line in lines:
     url = line.strip()
     print("downloading.. %s" % url)
